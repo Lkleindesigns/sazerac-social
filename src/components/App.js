@@ -1,11 +1,12 @@
 import React from 'react';
+import ArticleList from './ArticleList'
 
-
-function App() {
+const App = () => {
   return (
     <div className="">
       <header className="">
-
+        <h1>Sazerac Social</h1>
+        <ArticleList />
       </header>
     </div>
   );
