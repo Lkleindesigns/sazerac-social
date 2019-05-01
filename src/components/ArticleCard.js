@@ -7,7 +7,12 @@ const ArticleCard = ({article}) => {
     <div className="ArticleCard">
       {console.log(article)}
       <img alt={article.title} src={article.main_image} />
-      <a href='/'><h4>{article.title}</h4></a> 
+      <p className="ArticleCard-title">{article.title}</p>
+      <div className="ArticleCard-body">
+      <p>{new Date(article.created_at).toDateString()}</p> 
+      <p>{article.slug}</p>
+      </div>
+      
     </div>
   )
 }
