@@ -19,7 +19,7 @@ const Login = () => {
     })
       .then(res => res.json())
       .then(response =>
-        console.log("Success:", JSON.stringify(response.data.data))
+        console.log("Success:", JSON.stringify(response.data))
       )
       .catch(error => console.error("Error:", error));
   };
