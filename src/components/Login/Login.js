@@ -33,7 +33,7 @@ const Login = () => {
         "Content-Type": "application/json"
       }
     }).then(resp => resp.json())
-    .then(response => console.log("Success", JSON.stringify(response.data));
+    .then(response => console.log("Success", JSON.stringify(response.data)))
   };
 
   const handleChange = e => {
