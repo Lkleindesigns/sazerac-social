@@ -32,7 +32,7 @@ const Login = () => {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    }).then(resp => console.log(resp.json()))
+    }).then(resp => resp.json())
     .then(response => console.log("Success", JSON.stringify(response.data));
   };
 
