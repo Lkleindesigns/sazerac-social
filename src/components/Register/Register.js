@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Register.css'
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -20,8 +21,8 @@ const Register = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="Register">
+      <form className="Register-form" onSubmit={handleSubmit}>
         <label name="email">
           Email
           <input type="email" name="email" value={inputs.email} onChange={handleChange} required />

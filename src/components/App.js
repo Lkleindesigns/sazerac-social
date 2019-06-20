@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import { Route, Switch, NavLink } from 'react-router-dom'
 import ArticleList from './Article/ArticleList'
 import Login from './Login/Login'
 import Register from './Register/Register'
@@ -9,9 +10,18 @@ const App = () => {
     <div className="">
       <header className="">
         <h1>Sazerac Social</h1>
-        <Login />
-        <Register />
-        <ArticleList />
+        
+        <NavLink to="/">Blog </NavLink>
+        <NavLink to="/login">Login </NavLink>
+        <NavLink to="/register">Sign Up</NavLink>
+        
+        <Switch>
+          <Route exact path="/" render={() => <ArticleList />} />
+          <Route exact path="/login" render={() => <Login />} />
+          <Route exact path="/register" render={() => <Register />} />
+        </Switch>
+
+
       </header>
     </div>
   );
