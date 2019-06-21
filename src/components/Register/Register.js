@@ -17,7 +17,19 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(inputs)
+    fetch("https://morning-fortress-91258.herokuapp.com/api/v1/register", {
+      method: "POST",
+      body: JSON.stringify(inputs),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(response =>
+        console.log("Success:", JSON.stringify(response.data))
+      )
+      .catch(error => console.error("Error:", error));
   }
 
   return (
