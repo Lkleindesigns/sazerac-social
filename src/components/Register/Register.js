@@ -4,11 +4,11 @@ import './Register.css'
 const Register = () => {
   const [inputs, setInputs] = useState({
     email: "",
-    displayName: "",
-    firstName: "",
-    lastName: "",
+    display_name: "",
+    first_name: "",
+    last_name: "",
     password: "",
-    passwordConf: ""
+    password_confirmation: ""
   })
 
   const handleChange = e => {
@@ -17,9 +17,10 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    fetch("https://morning-fortress-91258.herokuapp.com/api/v1/register", {
+    console.log(JSON.stringify({user: inputs}))
+    fetch("https://morning-fortress-91258.herokuapp.com/api/v1/users", {
       method: "POST",
-      body: JSON.stringify(inputs),
+      body: JSON.stringify({user: inputs}),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -27,7 +28,7 @@ const Register = () => {
     })
       .then(res => res.json())
       .then(response =>
-        console.log("Success:", JSON.stringify(response.data))
+        console.log("Success:", response)
       )
       .catch(error => console.error("Error:", error));
   }
@@ -40,19 +41,19 @@ const Register = () => {
           <input type="email" name="email" value={inputs.email} onChange={handleChange} required />
         </label>
 
-        <label name="displayName">
+        <label name="display_name">
           Display name
-          <input type="text" name="displayName" value={inputs.displayName} onChange={handleChange} required />
+          <input type="text" name="display_name" value={inputs.display_name} onChange={handleChange} required />
         </label>
 
-        <label name="firstName">
+        <label name="first_name">
           First name
-         <input type="text" name="firstName" value={inputs.firstName} onChange={handleChange} required />          
+         <input type="text" name="first_name" value={inputs.first_name} onChange={handleChange} required />          
         </label>
          
-        <label name="lastName">
+        <label name="last_name">
           Last name
-          <input type="text" name="lastName" value={inputs.lastName} onChange={handleChange} required /> 
+          <input type="text" name="last_name" value={inputs.last_name} onChange={handleChange} required /> 
         </label>
 
         <label name="password">
@@ -60,9 +61,9 @@ const Register = () => {
           <input type="password" name="password" value={inputs.password} onChange={handleChange} required />  
         </label>
 
-        <label name="passwordConf">
+        <label name="password_confirmation">
           Password confirmation
-          <input type="password" name="passwordConf" value={inputs.passwordConf} onChange={handleChange} required />  
+          <input type="password" name="password_confirmation" value={inputs.password_confirmation} onChange={handleChange} required />  
         </label>
         <button>Sign Up</button>                                
       </form>
