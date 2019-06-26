@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   }
 });
 
-const LoginRegisterDialog = () => {
+const LoginRegisterDialog = ({ setUser}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = React.useState(0);
 
@@ -45,7 +45,6 @@ const LoginRegisterDialog = () => {
 
   return (
     <div>
-      
       <Button
         variant="outlined"
         className={classes.loginButton}
@@ -75,7 +74,7 @@ const LoginRegisterDialog = () => {
             <Tab label="Log In" />
             <Tab label="Sign Up" />
           </Tabs>
-          {value === 0 && <Login handleClose={handleClose} />}
+          {value === 0 && <Login handleClose={handleClose} setUser={setUser} />}
           {value === 1 && <Register handleClose={handleClose} />}
         </Paper>
       </Dialog>

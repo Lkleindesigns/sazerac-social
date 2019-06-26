@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -24,13 +24,37 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  btn: {
+    color: "white"
+  }
 }));
 
 export default function MenuAppBar() {
+
   const classes = useStyles();
   const [auth, setAuth] = React.useState(false);
+  const [user, setUser] = React.useState(null)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const getUser = async () => {
+    let test = await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/current_user", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => (data));
+    if(test.current_user) {
+      setUser(test.current_user.display_name)
+    } else {
+      console.log('wrong', test)
+    }
+  };
+
 
   function handleChange(event) {
     setAuth(event.target.checked);
@@ -43,6 +67,11 @@ export default function MenuAppBar() {
   function handleClose() {
     setAnchorEl(null);
   }
+
+  useEffect(() => {
+      getUser()
+  },[user])
+
 
   return (
     <div className={classes.root}>
@@ -61,11 +90,12 @@ export default function MenuAppBar() {
             Sazerac Social
           </Typography>
           {!auth && (
-            <LoginRegisterDialog />
+            <LoginRegisterDialog setUser={setUser} />
           )}
           {auth && (
             <div>
               <Button color="inherit">Blogs</Button>
+
               <IconButton
                 aria-label="Account of current user"
                 aria-controls="menu-appbar"
@@ -73,6 +103,7 @@ export default function MenuAppBar() {
                 onClick={handleMenu}
                 color="inherit"
               >
+                {user} 
                 <AccountCircle />
               </IconButton>
               <Menu

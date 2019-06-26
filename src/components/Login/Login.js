@@ -4,11 +4,43 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
-const Login = ({ handleClose }) => {
+const Login = ({ handleClose, setUser }) => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: ""
   });
+
+  const getUser = async () => {
+    let test = await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/current_user", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => (data));
+    if(test.current_user) {
+      setUser(test.current_user.display_name)
+    } else {
+      console.log('wrong', test)
+    }
+  };
+
+  const deleteUser = async () => {
+    await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/sessions", {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => console.log(data));
+      setUser(null)
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -25,35 +57,10 @@ const Login = ({ handleClose }) => {
       }
     )
       .then(res => res.json())
-      .then(response => console.log("Success:", JSON.stringify(response.data)))
+      .then(response => console.log("Success:",response))
       .catch(error => console.error("Error:", error));
+    getUser()
     handleClose();
-  };
-
-  const getUser = () => {
-    fetch("https://morning-fortress-91258.herokuapp.com/api/v1/current_user", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(resp => resp.json())
-      .then(data => console.log(data));
-  };
-
-  const deleteUser = () => {
-    fetch("https://morning-fortress-91258.herokuapp.com/api/v1/sessions", {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(resp => resp.json())
-      .then(data => console.log(data));
   };
 
   const handleChange = e => {
@@ -89,11 +96,11 @@ const Login = ({ handleClose }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={handleSubmit} color="primary">
-          Login
-        </Button>
+        <Button onClick={handleSubmit} color="primary">Login</Button>
         <Button onClick={handleClose} color="primary">Cancel</Button>
       </DialogActions>
+      <Button onClick={getUser} color="primary">getUser</Button>
+      <Button onClick={deleteUser} color="primary">deleteUser</Button>
     </form>
   );
 };
