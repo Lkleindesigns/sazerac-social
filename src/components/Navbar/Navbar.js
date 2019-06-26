@@ -12,6 +12,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
+import LoginRegisterDialog from '../LoginRegisterDialog/LoginRegisterDialog'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function MenuAppBar() {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -60,7 +61,7 @@ export default function MenuAppBar() {
             Sazerac Social
           </Typography>
           {!auth && (
-            <Button color="inherit">Login</Button>
+            <LoginRegisterDialog />
           )}
           {auth && (
             <div>

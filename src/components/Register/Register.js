@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
-import './Register.css'
+import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import "./Register.css";
 
-const Register = () => {
+const Register = ({handleClose}) => {
   const [inputs, setInputs] = useState({
     email: "",
     display_name: "",
@@ -9,66 +13,108 @@ const Register = () => {
     last_name: "",
     password: "",
     password_confirmation: ""
-  })
+  });
 
   const handleChange = e => {
-    setInputs({...inputs, [e.target.name]: e.target.value})
-  }
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(JSON.stringify({user: inputs}))
-    fetch("https://morning-fortress-91258.herokuapp.com/api/v1/users", {
+  const handleSubmit = async e => {
+    e.preventDefault();
+    await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/users", {
       method: "POST",
-      body: JSON.stringify({user: inputs}),
+      body: JSON.stringify({ user: inputs }),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
     })
       .then(res => res.json())
-      .then(response =>
-        console.log("Success:", response)
-      )
+      .then(response => console.log("Success:", response))
       .catch(error => console.error("Error:", error));
-  }
+    handleClose()
+  };
 
   return (
-    <div className="Register">
-      <form className="Register-form" onSubmit={handleSubmit}>
-        <label name="email">
-          Email
-          <input type="email" name="email" value={inputs.email} onChange={handleChange} required />
-        </label>
+    <form>
+      <DialogContent>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="email"
+          name="email"
+          label="Email Address"
+          type="email"
+          value={inputs.email}
+          onChange={handleChange}
+          required
+          fullWidth
+        />
+        <TextField
+          margin="dense"
+          id="display_name"
+          label="Display Name"
+          name="display_name"
+          type="text"
+          value={inputs.display_name}
+          onChange={handleChange}
+          required
+          fullWidth
+        />
+        <TextField
+          margin="dense"
+          id="first_name"
+          label="First Name"
+          name="first_name"
+          type="text"
+          value={inputs.first_name}
+          onChange={handleChange}
+          required
+          fullWidth
+        />
+        <TextField
+          margin="dense"
+          id="last_name"
+          label="Last Name"
+          name="last_name"
+          type="text"
+          value={inputs.last_name}
+          onChange={handleChange}
+          required
+          fullWidth
+        />
+        <TextField
+          margin="dense"
+          id="password"
+          label="Password"
+          name="password"
+          type="password"
+          value={inputs.password}
+          onChange={handleChange}
+          required
+          fullWidth
+        />
+        <TextField
+          margin="dense"
+          id="password_confirmation"
+          label="Password Confirmation"
+          name="password_confirmation"
+          type="password"
+          value={inputs.password_confirmation}
+          onChange={handleChange}
+          required
+          fullWidth
+        />
+      </DialogContent>
 
-        <label name="display_name">
-          Display name
-          <input type="text" name="display_name" value={inputs.display_name} onChange={handleChange} required />
-        </label>
+      <DialogActions>
+        <Button onClick={handleSubmit} color="primary">
+          Sign Up
+        </Button>
+        <Button onClick={handleClose} color="primary">Cancel</Button>
+      </DialogActions>
+    </form>
+  );
+};
 
-        <label name="first_name">
-          First name
-         <input type="text" name="first_name" value={inputs.first_name} onChange={handleChange} required />          
-        </label>
-         
-        <label name="last_name">
-          Last name
-          <input type="text" name="last_name" value={inputs.last_name} onChange={handleChange} required /> 
-        </label>
-
-        <label name="password">
-          Password (6 characters minimum) 
-          <input type="password" name="password" value={inputs.password} onChange={handleChange} required />  
-        </label>
-
-        <label name="password_confirmation">
-          Password confirmation
-          <input type="password" name="password_confirmation" value={inputs.password_confirmation} onChange={handleChange} required />  
-        </label>
-        <button>Sign Up</button>                                
-      </form>
-    </div>
-  )
-}
-
-export default Register
+export default Register;
