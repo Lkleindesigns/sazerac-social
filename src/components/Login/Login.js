@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import LoginDialog from './LoginDialog'
+
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -47,7 +49,6 @@ const Login = () => {
     })
     .then(resp => resp.json())
     .then(data => console.log(data))
-   
   }
 
   const handleChange = e => {
@@ -56,6 +57,7 @@ const Login = () => {
 
   return (
     <div>
+      <LoginDialog />
       <form onSubmit={handleSubmit}>
         <label name="email">Email</label>
         <input
