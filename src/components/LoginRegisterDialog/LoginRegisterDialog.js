@@ -25,9 +25,9 @@ const useStyles = makeStyles({
   }
 });
 
-const LoginRegisterDialog = ({ setUser}) => {
+const LoginRegisterDialog = ({ setUser }) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const classes = useStyles();
 

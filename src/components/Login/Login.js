@@ -28,20 +28,6 @@ const Login = ({ handleClose, setUser }) => {
     }
   };
 
-  const deleteUser = async () => {
-    await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/sessions", {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(resp => resp.json())
-      .then(data => console.log(data));
-      setUser(null)
-  };
-
   const handleSubmit = async e => {
     e.preventDefault();
     await fetch(
@@ -99,8 +85,7 @@ const Login = ({ handleClose, setUser }) => {
         <Button onClick={handleSubmit} color="primary">Login</Button>
         <Button onClick={handleClose} color="primary">Cancel</Button>
       </DialogActions>
-      <Button onClick={getUser} color="primary">getUser</Button>
-      <Button onClick={deleteUser} color="primary">deleteUser</Button>
+
     </form>
   );
 };

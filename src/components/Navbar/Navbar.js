@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -26,19 +27,27 @@ const useStyles = makeStyles(theme => ({
   },
   btn: {
     color: "white"
+  },
+  appBar: {
+    backgroundColor: theme.palette.primary,
+    color: "white"
+  },
+  navLink: {
+    color: theme.palette.text.primary,
+    textDecoration: "none"
   }
 }));
 
-export default function MenuAppBar() {
+export default function Navbar() {
 
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(false);
-  const [user, setUser] = React.useState(null)
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState(null)
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const getUser = async () => {
-    let test = await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/current_user", {
+    let currentUser = await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/current_user", {
       method: "GET",
       credentials: "include",
       headers: {
@@ -48,11 +57,28 @@ export default function MenuAppBar() {
     })
       .then(resp => resp.json())
       .then(data => (data));
-    if(test.current_user) {
-      setUser(test.current_user.display_name)
+    if(currentUser.current_user) {
+      setUser(currentUser.current_user.display_name)
+      setAuth(true)
     } else {
-      console.log('wrong', test)
+      console.log('wrong', currentUser)
     }
+  };
+
+  const deleteUser = async () => {
+    await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/sessions", {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => console.log(data));
+      setUser(null)
+      handleClose()
+      setAuth(false)
   };
 
 
@@ -81,7 +107,7 @@ export default function MenuAppBar() {
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
@@ -121,9 +147,8 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleClose}><Link className={classes.navLink} to="/settings/profile">My Account</Link></MenuItem>
+                <MenuItem onClick={deleteUser}>Logout</MenuItem>
               </Menu>
             </div>
           )}
