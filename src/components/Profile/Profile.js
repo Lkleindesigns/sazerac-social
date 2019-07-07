@@ -1,28 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { getUser } from '../../helpers/userHelpers'
 
 const Profile = (props) => {
   const [user, setUser] = useState(false)
 
   useEffect(() => {
-    const getUser = async () => {
-      let currentUser = await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/current_user", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      })
-        .then(resp => resp.json())
-        .then(data => (data));
-      if(currentUser.current_user) {
-        setUser(currentUser.current_user)
-      } else {
-        console.log('wrong', currentUser)
-      }
-    };
-    console.log('test')
-    getUser()
+    getUser().then(data => setUser(data))
   },[])
 
   return (

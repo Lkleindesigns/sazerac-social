@@ -3,30 +3,13 @@ import TextField from "@material-ui/core/TextField";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import { getUser } from '../../helpers/userHelpers' 
 
 const Login = ({ handleClose, setUser }) => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: ""
   });
-
-  const getUser = async () => {
-    let test = await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/current_user", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(resp => resp.json())
-      .then(data => (data));
-    if(test.current_user) {
-      setUser(test.current_user.display_name)
-    } else {
-      console.log('wrong', test)
-    }
-  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -45,7 +28,7 @@ const Login = ({ handleClose, setUser }) => {
       .then(res => res.json())
       .then(response => console.log("Success:",response))
       .catch(error => console.error("Error:", error));
-    getUser()
+    getUser().then(data => setUser(data))
     handleClose();
   };
 

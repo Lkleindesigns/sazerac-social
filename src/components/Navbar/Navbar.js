@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import LoginRegisterDialog from '../LoginRegisterDialog/LoginRegisterDialog'
+import { logoutUser, getUser } from '../../helpers/userHelpers'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,11 +40,11 @@ export default function Navbar() {
 
   const classes = useStyles();
   const [auth, setAuth] = useState(false);
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const getUser = async () => {
+  const loginUser = async () => {
     let currentUser = await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/current_user", {
       method: "GET",
       credentials: "include",
@@ -62,21 +63,12 @@ export default function Navbar() {
     }
   };
 
-  const deleteUser = async () => {
-    await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/sessions", {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(resp => resp.json())
-      .then(data => console.log(data));
-      setUser(null)
-      handleClose()
-      setAuth(false)
-  };
+  function handleLogout() {
+    logoutUser()
+    setAuth(false)
+    handleClose()
+    getUser()
+  }
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget);
@@ -87,7 +79,7 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-      getUser()
+      loginUser()
   },[user])
 
 
@@ -134,7 +126,7 @@ export default function Navbar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}><Link className={classes.navLink} to="/settings/profile">My Account</Link></MenuItem>
-                <MenuItem onClick={deleteUser}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
           )}
