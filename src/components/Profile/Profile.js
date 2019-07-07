@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const Profile = () => {
+const Profile = (props) => {
   const [user, setUser] = useState(false)
 
   useEffect(() => {
@@ -21,9 +21,9 @@ const Profile = () => {
         console.log('wrong', currentUser)
       }
     };
-
+    console.log('test')
     getUser()
-  }, [])
+  },[])
 
   return (
     <div>
@@ -35,7 +35,6 @@ const Profile = () => {
           {user.first_name}
           {user.last_name}
           {user.roles[0].name}
-          {console.log(user)}
         </div>
       )}
     </div>

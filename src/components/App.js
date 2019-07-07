@@ -13,7 +13,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" render={() => <ArticleList />} />
           <Route exact path="/register" render={() => <Register />} />
-          <Route exact path="/settings/profile" render={() => <Profile />} />
+          <Route exact path="/settings/profile" render={(routeProps) => <Profile {...routeProps} />} />
         </Switch>
     </>
   );
