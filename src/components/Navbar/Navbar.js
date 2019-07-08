@@ -37,7 +37,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Navbar() {
-
   const classes = useStyles();
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState(false)
@@ -62,6 +61,7 @@ export default function Navbar() {
       console.log('wrong', currentUser)
     }
   };
+
 
   function handleLogout() {
     logoutUser()

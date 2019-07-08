@@ -5,7 +5,6 @@ import './ArticleCard.css'
 const ArticleCard = ({article}) => {
   return (
     <div className="ArticleCard">
-      {console.log(article)}
       <img alt={article.title} src={article.main_image} />
       <p className="ArticleCard-title">{article.title}</p>
       <div className="ArticleCard-body">
