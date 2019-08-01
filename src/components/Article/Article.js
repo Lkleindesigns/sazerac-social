@@ -1,15 +1,16 @@
-import React from 'react'
+import React from "react";
 
-const Article = ({article}) => {
+const Article = ({ article }) => {
   return (
-    <div key={article.id}>
-      <h3>{article.title}</h3>
-      <p>{article.user_id}</p>
-      <img src={article.main_image} alt={article.main_image_alt_text} />
-      <p>{article.body}</p>
-
+    <div className="ArticleCard">
+      <img alt={article.title} src={article.main_image} />
+      <p className="ArticleCard-title">{article.title}</p>
+      <div className="ArticleCard-body">
+        <p>{new Date(article.created_at).toDateString()}</p>
+        <p>{article.slug}</p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Article
+export default Article;

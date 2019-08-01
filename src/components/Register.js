@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import "./Register.css";
+import { registerUser } from '../actions/userHelpers'
 
 const Register = ({handleClose}) => {
   const [inputs, setInputs] = useState({
@@ -21,98 +17,73 @@ const Register = ({handleClose}) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await fetch("https://morning-fortress-91258.herokuapp.com/api/v1/users", {
-      method: "POST",
-      body: JSON.stringify({ user: inputs }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(response => console.log("Success:", response))
-      .catch(error => console.error("Error:", error));
-    handleClose()
+    registerUser(inputs)
   };
 
   return (
-    <form>
-      <DialogContent>
-        <TextField
+    <form onSubmit={handleSubmit}>
+        <input
           autoFocus
           margin="dense"
           id="email"
           name="email"
-          label="Email Address"
+          placeholder="Email Address"
           type="email"
           value={inputs.email}
           onChange={handleChange}
           required
-          fullWidth
         />
-        <TextField
+        <input
           margin="dense"
           id="display_name"
-          label="Display Name"
+          placeholder="Display Name"
           name="display_name"
           type="text"
           value={inputs.display_name}
           onChange={handleChange}
           required
-          fullWidth
         />
-        <TextField
+        <input
           margin="dense"
           id="first_name"
-          label="First Name"
+          placeholder="First Name"
           name="first_name"
           type="text"
           value={inputs.first_name}
           onChange={handleChange}
           required
-          fullWidth
         />
-        <TextField
+        <input
           margin="dense"
           id="last_name"
-          label="Last Name"
+          placeholder="Last Name"
           name="last_name"
           type="text"
           value={inputs.last_name}
           onChange={handleChange}
           required
-          fullWidth
         />
-        <TextField
+        <input
           margin="dense"
           id="password"
-          label="Password"
+          placeholder="Password"
           name="password"
           type="password"
           value={inputs.password}
           onChange={handleChange}
           required
-          fullWidth
         />
-        <TextField
+        <input
           margin="dense"
           id="password_confirmation"
-          label="Password Confirmation"
+          placeholder="Password Confirmation"
           name="password_confirmation"
           type="password"
           value={inputs.password_confirmation}
           onChange={handleChange}
           required
-          fullWidth
         />
-      </DialogContent>
-
-      <DialogActions>
-        <Button onClick={handleSubmit} color="primary">
-          Sign Up
-        </Button>
-        <Button onClick={handleClose} color="primary">Cancel</Button>
-      </DialogActions>
+        <button>Sign up</button>
     </form>
   );
 };
