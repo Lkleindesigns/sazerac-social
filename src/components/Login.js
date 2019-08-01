@@ -16,7 +16,6 @@ const Login = () => {
       .then(res => getUser())
       .then(user => onLogin({logged_in: user.data.logged_in, current_user: user.data.current_user}))
       .catch(error => console.error("Error:", error));
-      
   };
 
   const handleChange = e => {

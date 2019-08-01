@@ -7,9 +7,20 @@ import Login from '../components/Login'
 import { Route, Switch } from 'react-router-dom';
 import { useAuthDataContext } from '../actions/AuthDataProvider'
 
-const PrivateRoute = ({ component, ...options }) => {
-  const { logged_in } = useAuthDataContext();
-  const finalComponent = logged_in ? component : Login;
+// const PrivateRoute = ({ component, ...options }) => {
+//   const { logged_in } = useAuthDataContext();
+//   const finalComponent = logged_in ? component : Login;
+
+//   return <Route {...options} component={finalComponent} />;
+// };
+
+const PrivateWriterRoute = ({ component, ...options }) => {
+  const { current_user } = useAuthDataContext();
+  let writer = current_user ? current_user.roles.find((m) => {
+    return m.name === 'writer'
+  }) : null
+ 
+  const finalComponent = writer ? component : Login;
 
   return <Route {...options} component={finalComponent} />;
 };
@@ -20,7 +31,7 @@ const Router = () => (
       <Route exact path="/" render={() => <Landing />} />
       <Route exact path="/register" render={() => <Register />} />
       <Route exact path="/articles" render={() => <ArticleList />} />
-      <PrivateRoute exact path="/create" render={(routeProps) => <CreateArticlePage {...routeProps} />} />
+      <PrivateWriterRoute exact path="/create" render={(routeProps) => <CreateArticlePage {...routeProps} />} />
     </Switch>
   </>
 )
