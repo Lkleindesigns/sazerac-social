@@ -18,7 +18,7 @@ function App() {
       <Link to="/">Landing </Link>
       <Link to="/register">Sign up</Link>
       <Link to="/articles">Articles</Link>
-      {isWriter ? <Link to="/create">Add post </Link> : null}
+      {isWriter ? <Link to="/publisher/article/new">Add post </Link> : null}
     </div>
   );
 }
