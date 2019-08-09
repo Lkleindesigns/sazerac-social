@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { registerUser } from '../actions/userHelpers'
 
+// needs form validations
+
 const Register = ({handleClose}) => {
   const [inputs, setInputs] = useState({
     email: "",

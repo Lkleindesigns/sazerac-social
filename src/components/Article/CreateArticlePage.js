@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import ReactQuill from 'react-quill'
 import axios from "axios";
+import 'react-quill/dist/quill.snow.css';
 
-// 1) no cookie, try posting - should error
-// 2) w/ cookie but not a writer - should return article data
-// 3) w/ cookie but is a writer - should return article data (edited)
+// needs validations
 
 const CreateArticlePage = routeProps => {
   const [inputs, setInputs] = useState({
@@ -12,18 +12,24 @@ const CreateArticlePage = routeProps => {
     main_image: "",
     main_image_title: "",
     main_image_alt_text: "",
-    body: ""
   });
+  const [text, setText] = useState('')
 
   const handleChange = e => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
+  const handleQuill = (value) => {
+    setText(value)
+  }
+
   const handleSubmit = async e => {
     e.preventDefault();
+    let article = {...inputs, text}
+    console.log(article)
     await axios("https://morning-fortress-91258.herokuapp.com/api/v1/articles", {
       method: "POST",
-      data: { article: inputs },
+      data: { article },
       withCredentials: true,
       headers: {
         Accept: "application/json",
@@ -33,6 +39,20 @@ const CreateArticlePage = routeProps => {
       .then(response => console.log("Success:", response))
       .catch(error => console.error("Error:", error));
   };
+
+  const modules = {
+    toolbar: [
+      [{ 'font': [] }],
+      [{ 'header': [1, 2, 3, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{ 'align': [] }],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image'],
+      [{ 'color': [] }, { 'background': [] }],       
+      ['clean'],
+    ],
+  }
+
 
   return (
     <div>
@@ -80,12 +100,13 @@ const CreateArticlePage = routeProps => {
           onChange={handleChange}
           required
         />
-        <textarea
-          id="body"
-          placeholder="body"
-          name="body"
-          value={inputs.body}
-          onChange={handleChange}
+        <ReactQuill
+          id="quill"
+          name="quill"
+          value={text}
+          onChange={handleQuill}
+          modules={modules}
+          theme="snow"
           required
         />
         <button>Submit</button>
