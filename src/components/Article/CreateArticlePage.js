@@ -13,19 +13,19 @@ const CreateArticlePage = routeProps => {
     main_image_title: "",
     main_image_alt_text: "",
   });
-  const [text, setText] = useState('')
+  const [body, setBody] = useState('')
 
   const handleChange = e => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
   const handleQuill = (value) => {
-    setText(value)
+    setBody(value)
   }
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let article = {...inputs, text}
+    let article = {...inputs, body}
     console.log(article)
     await axios("https://morning-fortress-91258.herokuapp.com/api/v1/articles", {
       method: "POST",
@@ -103,7 +103,7 @@ const CreateArticlePage = routeProps => {
         <ReactQuill
           id="quill"
           name="quill"
-          value={text}
+          value={body}
           onChange={handleQuill}
           modules={modules}
           theme="snow"
