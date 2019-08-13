@@ -6,7 +6,7 @@ const ArticleList = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    axios.get('https://morning-fortress-91258.herokuapp.com/api/v1')
+    axios.get('https://morning-fortress-91258.herokuapp.com/api/v1/articles')
     .then((data) => setArticles(data.data))
     .catch(err => console.log(err))
   }, [])
