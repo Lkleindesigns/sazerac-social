@@ -6,11 +6,9 @@ const ArticleList = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    axios.get('https://morning-fortress-91258.herokuapp.com/articles.json')
+    axios.get('https://morning-fortress-91258.herokuapp.com/api/v1')
     .then((data) => setArticles(data.data))
     .catch(err => console.log(err))
-
-    console.log('memory leak')
   }, [])
 
   return (
