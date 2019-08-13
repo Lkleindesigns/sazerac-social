@@ -6,8 +6,11 @@ const ArticleList = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    axios.get('https://morning-fortress-91258.herokuapp.com/api/v1/articles')
-    .then((data) => setArticles(data.data))
+    axios.get('https://morning-fortress-91258.herokuapp.com/api/v1/articles', {
+      withCredentials: true,
+
+    })
+    .then((data) => setArticles(data.data.articles))
     .catch(err => console.log(err))
   }, [])
 
