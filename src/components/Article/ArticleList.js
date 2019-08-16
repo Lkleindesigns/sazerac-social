@@ -10,7 +10,7 @@ const ArticleList = () => {
       withCredentials: true,
 
     })
-    .then((data) => setArticles(data.data.articles))
+    .then((res) => setArticles(res.data.articles))
     .catch(err => console.log(err))
   }, [])
 
