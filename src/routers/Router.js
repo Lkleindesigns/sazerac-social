@@ -2,6 +2,7 @@ import React from "react";
 import CreateArticlePage from "../components/Article/CreateArticlePage";
 import Register from "../components/Register";
 import ArticleList from "../components/Article/ArticleList";
+import ArticleShow from '../components/Article/ArticleShow'
 import Landing from "../components/Landing";
 import { Route, Switch } from "react-router-dom";
 import { useAuthDataContext } from "../actions/AuthDataProvider";
@@ -32,6 +33,7 @@ const Router = () => (
       <Route exact path="/" render={() => <Landing />} />
       <Route exact path="/register" render={() => <Register />} />
       <Route exact path="/articles" render={() => <ArticleList />} />
+      <Route exact path="/articles/:id" render={(routeProps) => <ArticleShow {...routeProps} />} />
       <PrivateWriterRoute
         exact
         path="/publisher/article/new"
