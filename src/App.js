@@ -6,6 +6,7 @@ import "./styles/App.css";
 
 function App() {
   const { current_user } = useAuthDataContext();
+
   const isWriter = current_user
     ? current_user.roles.find(m => {
         return m.name === "writer";

@@ -1,25 +1,25 @@
 import React from 'react'
 
-const ArticleShow = (props) => {
-  function createMarkup() {
-    return {__html: props.location.state.article.body}
+const ArticleShow = ({article}) => {
+
+  if (!article) {
+    return <h1>Loading</h1>
   }
+
+  function createMarkup() {
+    return {__html: article.body}
+  }
+
   return (
     <div>
-      <h1>Article Show Page</h1>
-      <img src={props.location.state.article.main_image} alt=""/>
+      <h1>{article.title}</h1>
+      <p>Article Id: {article.id}</p>
+      <img src={article.main_image} alt={article.alt_text} />
+      <p>Created At: {new Date(article.created_at).toDateString()}</p>
       <div dangerouslySetInnerHTML={createMarkup()}></div>
-      <p>{props.location.state.article.created_at}</p>
-      <p>{props.location.state.article.created_at}</p>
-      <p>{props.location.state.article.id}</p>
-      <p>{props.location.state.article.main_image_alt_text}</p>
-      <p>{props.location.state.article.title}</p>
-      <p>{props.location.state.article.slug}</p>
-      <p>{props.location.state.article.status}</p>
-      <img src={props.location.state.article.thumb_image} alt=""/>
-      <p>{props.location.state.article.updated_at}</p>
-      <p>{props.location.state.article.user_id}</p>
-      {console.log(props.location.state)}
+      <p>Published status: {article.status}</p>
+      <p>Article User Id: {article.user_id}</p>
+      <p>Last Updated: {new Date(article.updated_at).toDateString()}</p>
     </div>
   )
 }

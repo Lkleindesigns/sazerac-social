@@ -4,12 +4,15 @@ import './styles/index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import AuthDataProvider from './actions/AuthDataProvider'
+import ArticleProvider from './actions/ArticleContext'
 import * as serviceWorker from './serviceWorker';
 
 const MyApp = props => (
   <BrowserRouter>
     <AuthDataProvider>
-      <App />
+      <ArticleProvider>
+        <App />
+      </ArticleProvider>
     </AuthDataProvider>
   </BrowserRouter>
 )
