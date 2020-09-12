@@ -11,7 +11,7 @@ const ArticleProvider = (props) => {
   useEffect(() => {
 
     async function getArticles() {
-      const currentArticles = await axios.get('https://morning-fortress-91258.herokuapp.com/api/v1/articles', {
+      const currentArticles = await axios.get('https://sazeracsocial-api.herokuapp.com/api/v1/articles', {
           withCredentials: true,
         })
 

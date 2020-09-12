@@ -27,7 +27,7 @@ const CreateArticlePage = routeProps => {
     e.preventDefault();
     let article = {...inputs, body}
     console.log(article)
-    await axios("https://morning-fortress-91258.herokuapp.com/api/v1/articles", {
+    await axios("https://sazeracsocial-api.herokuapp.com/api/v1/articles", {
       method: "POST",
       data: { article },
       withCredentials: true,

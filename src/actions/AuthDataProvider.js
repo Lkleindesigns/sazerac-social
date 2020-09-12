@@ -11,7 +11,7 @@ const AuthDataProvider = (props) => {
   useEffect(() => {
 
     async function checkUser() {
-      const currentAuthData = await axios.get("https://morning-fortress-91258.herokuapp.com/api/v1/current_user", {
+      const currentAuthData = await axios.get("https://sazeracsocial-api.herokuapp.com/api/v1/current_user", {
         withCredentials: true,
         headers: {
           Accept: "application/json",
