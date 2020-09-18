@@ -11,14 +11,14 @@ const ArticleProvider = (props) => {
   useEffect(() => {
 
     async function getArticles() {
-      const currentArticles = await axios.get('https://sazeracsocial-api.herokuapp.com/api/v1/articles', {
+      const currentArticles = await axios.get(`${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/articles`, {
           withCredentials: true,
         })
 
       if(currentArticles.data.articles) {
         setArticles(currentArticles.data.articles)
       }
-    } 
+    }
     console.log('leak?')
     getArticles()
   }, [])

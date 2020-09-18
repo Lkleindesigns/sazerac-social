@@ -27,7 +27,7 @@ const CreateArticlePage = routeProps => {
     e.preventDefault();
     let article = {...inputs, body}
     console.log(article)
-    await axios("https://sazeracsocial-api.herokuapp.com/api/v1/articles", {
+    await axios(`${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/articles`, {
       method: "POST",
       data: { article },
       withCredentials: true,
@@ -48,7 +48,7 @@ const CreateArticlePage = routeProps => {
       [{ 'align': [] }],
       [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
       ['link', 'image'],
-      [{ 'color': [] }, { 'background': [] }],       
+      [{ 'color': [] }, { 'background': [] }],
       ['clean'],
     ],
   }

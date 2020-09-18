@@ -11,7 +11,7 @@ const AuthDataProvider = (props) => {
   useEffect(() => {
 
     async function checkUser() {
-      const currentAuthData = await axios.get("https://sazeracsocial-api.herokuapp.com/api/v1/current_user", {
+      const currentAuthData = await axios.get(`${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/current_user`, {
         withCredentials: true,
         headers: {
           Accept: "application/json",
@@ -22,12 +22,12 @@ const AuthDataProvider = (props) => {
       if(currentAuthData.data.logged_in) {
         setAuthData(currentAuthData.data)
       }
-    } 
+    }
 
     checkUser()
   }, [])
 
-  
+
   const onLogout = () => setAuthData(initialAuthData)
 
   const onLogin = newAuthData => setAuthData(newAuthData)
