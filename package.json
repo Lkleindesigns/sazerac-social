@@ -12,7 +12,7 @@
     "serve": "^11.3.2"
   },
   "scripts": {
-    "dev": "set PORT=3001 && react-scripts start",
+    "dev": "cross-env PORT=3001 react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -33,5 +33,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "cross-env": "^7.0.2"
+  }
 }
