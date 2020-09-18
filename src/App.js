@@ -20,6 +20,10 @@ function App() {
       <Link to="/register">Sign up</Link>
       <Link to="/articles">Articles</Link>
       {isWriter ? <Link to="/publisher/article/new">Add post </Link> : null}
+      <hr></hr>
+      <div>{process.env.NODE_ENV}</div>
+      <div>{process.env.PORT}</div>
+      <div>{process.env.REACT_APP_PORT}</div>
     </div>
   );
 }

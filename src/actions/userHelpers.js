@@ -3,7 +3,7 @@ import axios from "axios";
 // //return user object and logged_in
 export async function isLoggedIn() {
   return await axios.get(
-    "https://sazeracsocial-api.herokuapp.com/api/v1/logged_in",
+    `${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/logged_in`,
     {
       withCredentials: true,
       headers: {
@@ -17,7 +17,7 @@ export async function isLoggedIn() {
 // returns current_user object and no logged_in
 export async function getUser() {
   return await axios.get(
-    "https://sazeracsocial-api.herokuapp.com/api/v1/current_user",
+    `${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/current_user`,
     {
       method: "GET",
       withCredentials: true,
@@ -30,7 +30,7 @@ export async function getUser() {
 }
 
 export async function registerUser(credentials) {
-  return await axios("https://sazeracsocial-api.herokuapp.com/api/v1/users", {
+  return await axios(`${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/users`, {
     method: "POST",
     data: { user: credentials },
     headers: {
@@ -44,7 +44,7 @@ export async function registerUser(credentials) {
 
 export async function loginUser(credentials) {
   return await axios(
-    "https://sazeracsocial-api.herokuapp.com/api/v1/sessions",
+    `${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/sessions`,
     {
       method: "POST",
       data: credentials,
@@ -59,7 +59,7 @@ export async function loginUser(credentials) {
 
 export async function logoutUser() {
   return await axios(
-    "https://sazeracsocial-api.herokuapp.com/api/v1/sessions",
+    `${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/sessions`,
     {
       method: "DELETE",
       withCredentials: true,
