@@ -1,15 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
 import { FaAlignRight } from 'react-icons/fa';
 
 const Navbar = () => {
-  let state = {
-    toggle:false
-  }
-
-  function Toggle() {
-    this.setState({toggle:!this.state.toggle})
-  }
+  const [toggle, setToggle] = useState(0);
 
   const li = [
     {
@@ -29,10 +22,11 @@ const Navbar = () => {
   return (
     <>
       <div className="navBar">
-        <button onClick={Toggle}>
+        <button onClick={() => setToggle(!toggle)}>
           <FaAlignRight />
         </button>
-        <ul className={state.toggle ? "links show-nav" : "links"}>
+
+        <ul className={toggle ? "links show-nav" : "links"}>
           {
             li.map((objLink, i) => {
               return ( <li key={i}><a href={objLink.link}>{objLink.text}</a></li> )
