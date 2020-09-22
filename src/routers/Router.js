@@ -1,12 +1,13 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 import CreateArticlePage from "../components/Article/CreateArticlePage";
 import Register from "../components/Register";
 import ArticleList from "../components/Article/ArticleList";
-import ArticleShow from '../components/Article/ArticleShow'
+import ArticleShow from '../components/Article/ArticleShow';
 import Landing from "../components/Landing";
 import { Route, Switch } from "react-router-dom";
 import { useAuthDataContext } from "../actions/AuthDataProvider";
-import { useArticleContext } from '../actions/ArticleContext'
+import { useArticleContext } from '../actions/ArticleContext';
 
 // const PrivateRoute = ({ component, ...options }) => {
 //   const { logged_in } = useAuthDataContext();
@@ -39,6 +40,7 @@ const Router = () => {
 
   return(
   <>
+    <Navbar/> 
     <Switch>
       <Route exact path="/" render={() => <Landing />} />
       <Route exact path="/register" render={() => <Register />} />
