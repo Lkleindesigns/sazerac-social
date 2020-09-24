@@ -1,8 +1,21 @@
 import React, { useState } from "react";
+import Login from './Login'
 import { FaAlignRight } from 'react-icons/fa';
+import { logoutUser } from '../actions/userHelpers'
+import { useAuthDataContext } from '../actions/AuthDataProvider'
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(0);
+  const { current_user, logged_in, onLogout } = useAuthDataContext();
+
+  const handleLogout = () => {
+    logoutUser()
+    onLogout()
+  }
+
+  if(!logged_in) {
+    return <Login />
+  }
 
   const li = [
     {
@@ -11,11 +24,11 @@ const Navbar = () => {
     },
     {
       link: "/about/",
-      text:"About us"
+      text:"About"
     },
     {
       link: "/contact/",
-      text:"Contact us"
+      text:"Contact"
     }
   ];
 
@@ -25,6 +38,13 @@ const Navbar = () => {
         <button onClick={() => setToggle(!toggle)}>
           <FaAlignRight />
         </button>
+
+        <button onClick={handleLogout}>
+          Logout
+        </button>
+
+        <button onClick={handleLogout}>Logout</button>
+        <span>Hello {current_user.first_name} {current_user.last_name} </span>
 
         <ul className={toggle ? "links show-nav" : "links"}>
           {
