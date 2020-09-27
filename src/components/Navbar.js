@@ -41,7 +41,7 @@ const Navbar = () => {
             <Login />
         }
 
-        <button onClick={() => setToggle(!toggle)}>
+        <button className="nav-collapse-toggle" onClick={() => setToggle(!toggle)}>
           <FaAlignRight />
         </button>
 
