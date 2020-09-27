@@ -13,10 +13,6 @@ const Navbar = () => {
     onLogout()
   }
 
-  if(!logged_in) {
-    return <Login />
-  }
-
   const li = [
     {
       link: "/",
@@ -35,16 +31,19 @@ const Navbar = () => {
   return (
     <>
       <div className="navBar">
+        {
+          logged_in ?
+            <>
+              <button onClick={handleLogout}>Logout</button>
+              <span>{current_user.first_name} {current_user.last_name}</span>
+            </>
+          :
+            <Login />
+        }
+
         <button onClick={() => setToggle(!toggle)}>
           <FaAlignRight />
         </button>
-
-        <button onClick={handleLogout}>
-          Logout
-        </button>
-
-        <button onClick={handleLogout}>Logout</button>
-        <span>Hello {current_user.first_name} {current_user.last_name} </span>
 
         <ul className={toggle ? "links show-nav" : "links"}>
           {
