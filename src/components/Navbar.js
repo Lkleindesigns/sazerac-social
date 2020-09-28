@@ -7,7 +7,7 @@ import { useAuthDataContext } from '../actions/AuthDataProvider'
 
 const Navbar = () => {
   const [ toggle, setToggle ] = useState(0);
-  const [ showModal, modalToggle ] = useState({showModal: false});
+  const [ showModal, setShowModal ] = useState(false);
   const { current_user, logged_in, onLogout } = useAuthDataContext();
 
   const handleLogout = () => {
@@ -15,12 +15,12 @@ const Navbar = () => {
     onLogout()
   }
 
-  const loginModalShow = () => {
-    modalToggle({showModal: true})
+  function loginModalShow() {
+    setShowModal(true)
   }
 
-  const loginModalHide = () => {
-    modalToggle({showModal: false})
+  function loginModalHide() {
+    setShowModal(false)
   }
 
   const li = [
@@ -49,7 +49,7 @@ const Navbar = () => {
             </>
           :
             <>
-              <LoginModal handleClose={() => loginModalHide()} show={showModal}>
+              <LoginModal handleClose={() => loginModalHide()} showModal={showModal}>
                 <p>Modal</p>
                 <p>Data</p>
               </LoginModal>
