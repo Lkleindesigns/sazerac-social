@@ -34,7 +34,6 @@ const Login = () => {
           value={credentials.email}
           onChange={handleChange}
           required
-
         />
         <input
           margin="dense"

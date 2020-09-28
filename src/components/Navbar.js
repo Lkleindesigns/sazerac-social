@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import Login from './Login'
+import LoginModal from './LoginModal'
 import { FaAlignRight } from 'react-icons/fa';
 import { logoutUser } from '../actions/userHelpers'
 import { useAuthDataContext } from '../actions/AuthDataProvider'
 
 const Navbar = () => {
-  const [toggle, setToggle] = useState(0);
+  const [ toggle, setToggle ] = useState(0);
+  const [ showModal, modalToggle ] = useState({showModal: false});
   const { current_user, logged_in, onLogout } = useAuthDataContext();
 
   const handleLogout = () => {
     logoutUser()
     onLogout()
+  }
+
+  const loginModalShow = () => {
+    modalToggle({showModal: true})
+  }
+
+  const loginModalHide = () => {
+    modalToggle({showModal: false})
   }
 
   const li = [
@@ -38,7 +48,15 @@ const Navbar = () => {
               <span>{current_user.first_name} {current_user.last_name}</span>
             </>
           :
-            <Login />
+            <>
+              <LoginModal handleClose={() => loginModalHide()} show={showModal}>
+                <p>Modal</p>
+                <p>Data</p>
+              </LoginModal>
+              <button type="button" onClick={() => loginModalShow()}>
+                Login/Signup
+              </button>
+            </>
         }
 
         <button className="nav-collapse-toggle" onClick={() => setToggle(!toggle)}>
