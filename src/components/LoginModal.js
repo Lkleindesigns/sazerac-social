@@ -7,7 +7,7 @@ const LoginModal = ({ handleClose, showModal, children }) => {
   return (
     <div className={showHideClassName}>
       <section className="modal-main">
-        {children}
+        <Login />
         <button onClick={() => handleClose()}>close</button>
       </section>
     </div>

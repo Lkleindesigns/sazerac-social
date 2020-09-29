@@ -11,6 +11,7 @@ const Navbar = () => {
   const { current_user, logged_in, onLogout } = useAuthDataContext();
 
   const handleLogout = () => {
+    loginModalHide()
     logoutUser()
     onLogout()
   }
