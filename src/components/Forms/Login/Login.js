@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useAuthDataContext } from '../actions/AuthDataProvider'
-import { getUser, loginUser } from '../actions/userHelpers'
+import { useAuthDataContext } from '../../../actions/AuthDataProvider'
+import { getUser, loginUser } from '../../../actions/userHelpers'
 
 const Login = () => {
   const { onLogin, data } = useAuthDataContext()

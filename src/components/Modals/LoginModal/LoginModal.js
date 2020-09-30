@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Login from './Login'
-import Register from './Register'
+import Login from '../../../components/Forms/Login/Login'
+import Register from '../../../components/Forms/Register/Register'
+import "./LoginModal.css";
 
 const LoginModal = ({ handleClose, showModal, children }) => {
   const showHideClassName = showModal ? "modal display-block" : "modal display-none";

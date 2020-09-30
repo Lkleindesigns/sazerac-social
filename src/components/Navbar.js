@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Login from './Login'
-import LoginModal from './LoginModal'
+import LoginModal from './Modals/LoginModal/LoginModal.js'
 import { FaAlignRight } from 'react-icons/fa';
 import { logoutUser } from '../actions/userHelpers'
 import { useAuthDataContext } from '../actions/AuthDataProvider'
