@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import LoginModal from './Modals/LoginModal/LoginModal.js'
+import LoginModal from '../Modals/LoginModal/LoginModal'
 import { FaAlignRight } from 'react-icons/fa';
-import { logoutUser } from '../actions/userHelpers'
-import { useAuthDataContext } from '../actions/AuthDataProvider'
+import { logoutUser } from '../../actions/userHelpers'
+import { useAuthDataContext } from '../../actions/AuthDataProvider'
+import "./Navbar.css";
 
 const Navbar = () => {
   const [ toggle, setToggle ] = useState(0);

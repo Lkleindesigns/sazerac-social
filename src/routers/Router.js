@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import CreateArticlePage from "../components/Article/CreateArticlePage";
 import Register from '../components/Forms/Register/Register'
 import ArticleList from "../components/Article/ArticleList";
