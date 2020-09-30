@@ -30,12 +30,8 @@ const Navbar = () => {
       text:"Home"
     },
     {
-      link: "/about/",
-      text:"About"
-    },
-    {
-      link: "/contact/",
-      text:"Contact"
+      link: "/articles",
+      text:"Articles"
     }
   ];
 
