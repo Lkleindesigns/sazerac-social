@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 import CreateArticlePage from "../components/Article/CreateArticlePage";
 import Register from "../components/Register";
 import ArticleList from "../components/Article/ArticleList";
@@ -39,6 +40,7 @@ const Router = () => {
 
   return(
     <>
+      <Navbar />
       <Switch>
         <Route exact path="/" render={() => <Landing />} />
         <Route exact path="/register" render={() => <Register />} />
