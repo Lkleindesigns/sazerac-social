@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useArticleContext } from '../../actions/ArticleContext'
+import { useSelector, useDispatch } from 'react-redux'
 import Article from './Article'
+import { initializeArticles } from '../../reducers/articleReducer'
 
 const ArticleList = () => {
+    const articles = useSelector(state => state.articles)
+    const dispatch = useDispatch()
 
-  const articles = useArticleContext()
+    useEffect(() => {
+      dispatch(initializeArticles())
 
+    }, [dispatch])
+    
   return (
     <div className="ArticleList">
       <h1>Articles</h1>
