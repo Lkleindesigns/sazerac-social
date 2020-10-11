@@ -5,7 +5,6 @@ import { useAuthDataContext } from '../actions/AuthDataProvider'
 
 
 const Landing = () => {
-  
   const { current_user, logged_in, onLogout } = useAuthDataContext();
 
   const handleLogout = () => {

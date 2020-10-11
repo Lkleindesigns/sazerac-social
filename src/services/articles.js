@@ -5,8 +5,20 @@ const getAll = async () => {
   const response = await axios.get(`${baseUrl}/articles`, {
     withCredentials: true,
   })
-
   return response.data.articles
 }
 
-export default { getAll }
+const create =  async (article) => {
+  const response = await axios(`${baseUrl}/articles`, {
+    method: "POST",
+    data: { article },
+    withCredentials: true,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
+  })
+  return response.data
+}
+
+export default { getAll, create }

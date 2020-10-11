@@ -10,7 +10,6 @@ const ArticleList = () => {
 
     useEffect(() => {
       dispatch(initializeArticles())
-
     }, [dispatch])
     
   return (

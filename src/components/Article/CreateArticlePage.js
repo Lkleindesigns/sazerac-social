@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import ReactQuill from 'react-quill'
-import axios from "axios";
 import 'react-quill/dist/quill.snow.css';
-
+import { createArticle } from '../../reducers/articleReducer'
+import { useDispatch } from 'react-redux'
 // needs validations
 
 const CreateArticlePage = routeProps => {
+  const dispatch = useDispatch()
+  const [body, setBody] = useState('')
+
   const [inputs, setInputs] = useState({
     title: "",
     thumb_image: "",
@@ -13,7 +16,6 @@ const CreateArticlePage = routeProps => {
     main_image_title: "",
     main_image_alt_text: "",
   });
-  const [body, setBody] = useState('')
 
   const handleChange = e => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -26,18 +28,7 @@ const CreateArticlePage = routeProps => {
   const handleSubmit = async e => {
     e.preventDefault();
     let article = {...inputs, body}
-    console.log(article)
-    await axios(`${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/articles`, {
-      method: "POST",
-      data: { article },
-      withCredentials: true,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => console.log("Success:", response))
-      .catch(error => console.error("Error:", error));
+    dispatch(createArticle(article))
   };
 
   const modules = {
