@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Login from '../../../components/Forms/Login/Login'
-import Register from '../../../components/Forms/Register/Register'
+import LoginForm from '../../components/LoginForm/LoginForm'
+import RegisterForm from '../../components/RegisterForm/RegisterForm'
 import "./LoginModal.css";
 
 const LoginModal = ({ handleClose, showModal, children }) => {
@@ -11,9 +11,9 @@ const LoginModal = ({ handleClose, showModal, children }) => {
     <div className={showHideClassName}>
       <section className="modal-main">
         <div className="moo-2">
-          { showRegisterForm ? <Register /> : <Login /> }
+          { showRegisterForm ? <RegisterForm /> : <LoginForm /> }
         </div>
-        <button className="moo" onClick={() => setShowRegisterForm(!showRegisterForm)}>Register</button>
+        <button className="moo" onClick={() => setShowRegisterForm(!showRegisterForm)}>{ showRegisterForm ? "Login": "Register" }</button>
         <button onClick={() => handleClose()}>close</button>
       </section>
     </div>

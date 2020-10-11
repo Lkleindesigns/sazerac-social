@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar/Navbar";
 import CreateArticlePage from "../components/Article/CreateArticlePage";
-import Register from '../components/Forms/Register/Register'
+import RegisterForm from '../components/RegisterForm/RegisterForm'
 import ArticleList from "../components/Article/ArticleList";
 import ArticleShow from '../components/Article/ArticleShow';
 import Landing from "../components/Landing";
@@ -43,7 +43,7 @@ const Router = () => {
       <Navbar />
       <Switch>
         <Route exact path="/" render={() => <Landing />} />
-        <Route exact path="/register" render={() => <Register />} />
+        <Route exact path="/register" render={() => <RegisterForm />} />
         <Route exact path="/articles" render={() => <ArticleList />} />
         <Route exact path="/articles/:id" render={(routeProps) => <ArticleShow {...routeProps} article={findArticle(routeProps.match.params.id)} />} />
         <PrivateWriterRoute
