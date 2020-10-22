@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { registerUser } from '../actions/userHelpers'
+import { registerUser } from '../../actions/userHelpers'
 
 // needs form validations
-
-const Register = ({handleClose}) => {
+const RegisterForm = ({handleClose}) => {
   const [inputs, setInputs] = useState({
     email: "",
     display_name: "",
@@ -90,4 +89,4 @@ const Register = ({handleClose}) => {
   );
 };
 
-export default Register;
+export default RegisterForm;

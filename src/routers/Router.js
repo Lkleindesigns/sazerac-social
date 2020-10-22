@@ -1,8 +1,9 @@
 import React from "react";
+import Navbar from "../components/Navbar/Navbar";
 import CreateArticlePage from "../components/Article/CreateArticlePage";
-import Register from "../components/Register";
+import RegisterForm from '../components/RegisterForm/RegisterForm'
 import ArticleList from "../components/Article/ArticleList";
-import ArticleShow from '../components/Article/ArticleShow'
+import ArticleShow from '../components/Article/ArticleShow';
 import Landing from "../components/Landing";
 import { Route, Switch } from "react-router-dom";
 import { useAuthDataContext } from "../actions/AuthDataProvider";
@@ -38,19 +39,20 @@ const Router = () => {
   }
 
   return(
-  <>
-    <Switch>
-      <Route exact path="/" render={() => <Landing />} />
-      <Route exact path="/register" render={() => <Register />} />
-      <Route exact path="/articles" render={() => <ArticleList />} />
-      <Route exact path="/articles/:id" render={(routeProps) => <ArticleShow {...routeProps} article={findArticle(routeProps.match.params.id)} />} />
-      <PrivateWriterRoute
-        exact
-        path="/publisher/article/new"
-        render={routeProps => <CreateArticlePage {...routeProps} />}
-      />
-    </Switch>
-  </>
+    <>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" render={() => <Landing />} />
+        <Route exact path="/register" render={() => <RegisterForm />} />
+        <Route exact path="/articles" render={() => <ArticleList />} />
+        <Route exact path="/articles/:id" render={(routeProps) => <ArticleShow {...routeProps} article={findArticle(routeProps.match.params.id)} />} />
+        <PrivateWriterRoute
+          exact
+          path="/publisher/article/new"
+          render={routeProps => <CreateArticlePage {...routeProps} />}
+        />
+      </Switch>
+    </>
   )
 };
 

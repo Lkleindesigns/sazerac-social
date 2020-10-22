@@ -16,10 +16,7 @@ function App() {
   return (
     <div>
       <Router />
-      <Link to="/">Landing </Link>
-      <Link to="/register">Sign up</Link>
-      <Link to="/articles">Articles</Link>
-      {isWriter ? <Link to="/publisher/article/new">Add post </Link> : null}
+      { isWriter ? <Link to="/publisher/article/new">Add post </Link> : null }
       <hr></hr>
       <div>{process.env.NODE_ENV}</div>
       <div>{process.env.PORT}</div>
