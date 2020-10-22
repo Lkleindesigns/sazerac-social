@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './store'
 import AuthDataProvider from './actions/AuthDataProvider'
-import ArticleProvider from './actions/ArticleContext'
 import * as serviceWorker from './serviceWorker';
 
 const MyApp = props => (
   <BrowserRouter>
-    <AuthDataProvider>
-      <ArticleProvider>
+    <Provider store={store}>
+      <AuthDataProvider>
         <App />
-      </ArticleProvider>
-    </AuthDataProvider>
+      </AuthDataProvider>
+    </Provider>
   </BrowserRouter>
 )
 

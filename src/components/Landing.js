@@ -1,6 +1,16 @@
 import React from 'react'
 
 const Landing = () => {
+  const { current_user, logged_in, onLogout } = useAuthDataContext();
+
+  const handleLogout = () => {
+    logoutUser()
+    onLogout()
+  }
+
+  if(!logged_in) {
+    return <Login />
+  }
   return (
     <>
       <div>

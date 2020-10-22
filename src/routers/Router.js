@@ -7,7 +7,7 @@ import ArticleShow from '../components/Article/ArticleShow';
 import Landing from "../components/Landing";
 import { Route, Switch } from "react-router-dom";
 import { useAuthDataContext } from "../actions/AuthDataProvider";
-import { useArticleContext } from '../actions/ArticleContext';
+import { useSelector } from 'react-redux'
 
 // const PrivateRoute = ({ component, ...options }) => {
 //   const { logged_in } = useAuthDataContext();
@@ -30,7 +30,7 @@ const PrivateWriterRoute = ({ component, ...options }) => {
 };
 
 const Router = () => {
-  const articles = useArticleContext()
+  const articles = useSelector(state => state.articles)
 
   const findArticle = id => {
     return articles.find(function(article) {

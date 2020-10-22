@@ -26,7 +26,7 @@ export async function getUser() {
         "Content-Type": "application/json"
       }
     }
-  );
+  )
 }
 
 export async function registerUser(credentials) {
@@ -38,8 +38,6 @@ export async function registerUser(credentials) {
       "Content-Type": "application/json"
     }
   })
-    .then(response => console.log("Success:", response))
-    .catch(error => console.error("Error:", error));
 }
 
 export async function loginUser(credentials) {
