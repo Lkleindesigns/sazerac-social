@@ -5,15 +5,12 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
-import AuthDataProvider from './actions/AuthDataProvider'
 import * as serviceWorker from './serviceWorker';
 
 const MyApp = props => (
   <BrowserRouter>
     <Provider store={store}>
-      <AuthDataProvider>
-        <App />
-      </AuthDataProvider>
+      <App />
     </Provider>
   </BrowserRouter>
 )

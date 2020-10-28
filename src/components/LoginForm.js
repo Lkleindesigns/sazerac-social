@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { useAuthDataContext } from '../../actions/AuthDataProvider'
-import { getUser, loginUser } from '../../actions/userHelpers'
+import { useDispatch } from 'react-redux'
+import { loginUser } from  '../reducers/userReducer'
 
 const LoginForm = () => {
-  const { onLogin, data } = useAuthDataContext()
-
+  const dispatch = useDispatch()
   const [credentials, setCredentials] = useState({
     email: "",
     password: ""
@@ -12,10 +11,7 @@ const LoginForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-      loginUser(credentials)
-      .then(res => getUser())
-      .then(user => onLogin({logged_in: user.data.logged_in, current_user: user.data.current_user}))
-      .catch(error => console.error("Error:", error));
+    dispatch(loginUser(credentials))
   };
 
   const handleChange = e => {
@@ -47,7 +43,6 @@ const LoginForm = () => {
         />
 
         <button>Login</button>
-          { data ? console.log(data.user) : null}
     </form>
   );
 };
