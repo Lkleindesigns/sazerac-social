@@ -4,14 +4,13 @@ import { loginUser } from  '../reducers/userReducer'
 
 const LoginForm = () => {
   const dispatch = useDispatch()
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: ""
-  });
+  const initialState = { email: "", password: "" }
+  const [credentials, setCredentials] = useState(initialState);
 
   const handleSubmit = async e => {
     e.preventDefault();
     dispatch(loginUser(credentials))
+    setCredentials(initialState)
   };
 
   const handleChange = e => {

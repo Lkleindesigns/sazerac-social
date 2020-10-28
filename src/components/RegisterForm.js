@@ -5,15 +5,16 @@ import { registerUser } from '../reducers/userReducer'
 // needs form validations
 const RegisterForm = () => {
   const dispatch = useDispatch()
-
-  const [inputs, setInputs] = useState({
+  
+  const initialState = {
     email: "",
     display_name: "",
     first_name: "",
     last_name: "",
     password: "",
     password_confirmation: ""
-  });
+  }
+  const [inputs, setInputs] = useState(initialState);
 
   const handleChange = e => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -22,6 +23,7 @@ const RegisterForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     dispatch(registerUser(inputs))
+    setInputs(initialState)
   };
 
   return (

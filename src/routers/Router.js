@@ -24,8 +24,8 @@ const PrivateWriterRoute = ({ component, ...options }) => {
   }
 
   let writer = user.current_user
-    ? user.current_user.roles.find(m => {
-        return m.name === "writer";
+    ? user.current_user.roles.find(role => {
+        return role.name === "writer";
       })
     : null;
 

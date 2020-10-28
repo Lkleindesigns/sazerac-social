@@ -13,8 +13,8 @@ const Navbar = () => {
   };
 
   const isWriter = user
-    ? user.current_user.roles.find((m) => {
-        return m.name === "writer";
+    ? user.current_user.roles.find((role) => {
+        return role.name === "writer";
       })
     : null;
 
@@ -25,6 +25,7 @@ const Navbar = () => {
         {user && <button onClick={handleLogout}>Logout </button>}
         <Link to="/">Home </Link>
         <Link to="/articles">Articles </Link>
+        {user && `${user.current_user.display_name} is logged in`}
         {!user && (
           <>
             <Link to="/login">Login </Link>

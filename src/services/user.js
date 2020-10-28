@@ -18,22 +18,6 @@ async function login(credentials) {
 
 // returns current_user object and no logged_in
 async function getUser() {
-  const response = await axios.get(
-    `${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/current_user`,
-    {
-      method: "GET",
-      withCredentials: true,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    }
-  )
-  return response.data
-}
-
-
-async function checkUser() {
   const response = await axios.get(`${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/current_user`, {
     withCredentials: true,
     headers: {
@@ -43,7 +27,6 @@ async function checkUser() {
   })
   return response.data
 }
-
 
 
 async function logout() {
@@ -61,7 +44,7 @@ async function logout() {
   return response.data
 }
 
-export async function register(credentials) {
+async function register(credentials) {
   const response = await axios(`${process.env.REACT_APP_SAZERAC_SOCIAL_API_BASE_URL}/users`, {
     method: "POST",
     data: { user: credentials },
@@ -91,4 +74,4 @@ async function isLoggedIn() {
 
 
 
-export default { login, logout, isLoggedIn, getUser, checkUser, register  }
+export default { login, logout, isLoggedIn, getUser, register  }

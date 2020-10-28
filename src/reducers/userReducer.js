@@ -28,7 +28,7 @@ export const logoutUser = () => {
 
 export const checkUserSession = () => {
   return async dispatch => {
-    const user = await userService.checkUser()
+    const user = await userService.getUser()
     if (user) {
       dispatch({
         type: "LOGIN",
@@ -40,13 +40,9 @@ export const checkUserSession = () => {
 
 export const registerUser = (credentials) => {
   return async dispatch => {
-    
-    const newUser = await userService.register(credentials)
-    console.log(newUser)
-    const login = await userService.login({email: credentials.email, password: credentials.password})
-    console.log(login)
+    await userService.register(credentials)
+    await userService.login({email: credentials.email, password: credentials.password})
     const user = await userService.getUser()
-    console.log(user)
    dispatch({
      type: "REGISTER",
      user
