@@ -41,12 +41,12 @@ export const checkUserSession = () => {
 export const registerUser = (credentials) => {
   return async dispatch => {
     await userService.register(credentials)
-    await userService.login({email: credentials.email, password: credentials.password})
+    await userService.login({ email: credentials.email, password: credentials.password })
     const user = await userService.getUser()
-   dispatch({
-     type: "REGISTER",
-     user
-   })
+    dispatch({
+      type: "REGISTER",
+      user
+    })
   }
 }
 

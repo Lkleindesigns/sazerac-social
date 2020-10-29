@@ -26,7 +26,6 @@ export default (state = initialState, action) => {
     case "INIT_ARTICLES":
       return action.articles
     case "CREATE_ARTICLE":
-      console.log(action)
       return [...state, action.data]
     default:
       return state;

@@ -10,8 +10,8 @@ import { Route, Switch } from "react-router-dom";
 import { useSelector } from 'react-redux'
 
 // const PrivateRoute = ({ component, ...options }) => {
-//   const { logged_in } = useSelector(state => state.user);
-//   const finalComponent = logged_in ? component : Login;
+//   const user = useSelector(state => state.user);
+//   const finalComponent = user.logged_in ? component : Login;
 
 //   return <Route {...options} component={finalComponent} />;
 // };
