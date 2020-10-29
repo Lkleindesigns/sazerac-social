@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-import { registerUser } from '../actions/userHelpers'
+import { useDispatch } from 'react-redux'
+import { registerUser } from '../reducers/userReducer'
 
 // needs form validations
-
-const Register = ({handleClose}) => {
-  const [inputs, setInputs] = useState({
+const RegisterForm = () => {
+  const dispatch = useDispatch()
+  
+  const initialState = {
     email: "",
     display_name: "",
     first_name: "",
     last_name: "",
     password: "",
     password_confirmation: ""
-  });
+  }
+  const [inputs, setInputs] = useState(initialState);
 
   const handleChange = e => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -19,7 +22,8 @@ const Register = ({handleClose}) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    registerUser(inputs)
+    dispatch(registerUser(inputs))
+    setInputs(initialState)
   };
 
   return (
@@ -90,4 +94,4 @@ const Register = ({handleClose}) => {
   );
 };
 
-export default Register;
+export default RegisterForm;

@@ -1,21 +1,16 @@
 import React, { useState } from 'react'
-import { useAuthDataContext } from '../actions/AuthDataProvider'
-import { getUser, loginUser } from '../actions/userHelpers'
+import { useDispatch } from 'react-redux'
+import { loginUser } from  '../reducers/userReducer'
 
-const Login = () => {
-  const { onLogin, data } = useAuthDataContext()
-
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: ""
-  });
+const LoginForm = () => {
+  const dispatch = useDispatch()
+  const initialState = { email: "", password: "" }
+  const [credentials, setCredentials] = useState(initialState);
 
   const handleSubmit = async e => {
     e.preventDefault();
-      loginUser(credentials)
-      .then(res => getUser())
-      .then(user => onLogin({logged_in: user.data.logged_in, current_user: user.data.current_user}))
-      .catch(error => console.error("Error:", error));
+    dispatch(loginUser(credentials))
+    setCredentials(initialState)
   };
 
   const handleChange = e => {
@@ -34,7 +29,6 @@ const Login = () => {
           value={credentials.email}
           onChange={handleChange}
           required
-
         />
         <input
           margin="dense"
@@ -48,9 +42,8 @@ const Login = () => {
         />
 
         <button>Login</button>
-          { data ? console.log(data.user) : null}
     </form>
   );
 };
 
-export default Login;
+export default LoginForm;
