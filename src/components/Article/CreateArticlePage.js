@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css';
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { createArticle } from '../../reducers/articleReducer'
 import { useDispatch } from 'react-redux'
 // needs validations
@@ -21,29 +21,18 @@ const CreateArticlePage = routeProps => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
-  const handleQuill = (value) => {
-    setBody(value)
+  const handleCKEditor = (e, editor) => {
+    
+    const data = editor.getData()
+    setBody(data)
   }
 
   const handleSubmit = async e => {
     e.preventDefault();
     let article = {...inputs, body}
     dispatch(createArticle(article))
+    routeProps.history.push('/articles')
   };
-
-  const modules = {
-    toolbar: [
-      [{ 'font': [] }],
-      [{ 'header': [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{ 'align': [] }],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
-      [{ 'color': [] }, { 'background': [] }],
-      ['clean'],
-    ],
-  }
-
 
   return (
     <div>
@@ -91,14 +80,9 @@ const CreateArticlePage = routeProps => {
           onChange={handleChange}
           required
         />
-        <ReactQuill
-          id="quill"
-          name="quill"
-          value={body}
-          onChange={handleQuill}
-          modules={modules}
-          theme="snow"
-          required
+        <CKEditor  
+          editor={ClassicEditor}
+          onChange={handleCKEditor}
         />
         <button>Submit</button>
       </form>
