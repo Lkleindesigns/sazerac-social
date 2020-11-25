@@ -20,5 +20,5 @@ const create =  async (article) => {
   })
   return response.data
 }
-
-export default { getAll, create }
+const articleService = { getAll, create }
+export default articleService

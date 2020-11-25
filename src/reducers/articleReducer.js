@@ -21,7 +21,7 @@ export const createArticle = (article) => {
   }
 }
 
-export default (state = initialState, action) => {
+const articleReducer =(state = initialState, action) => {
   switch(action.type) {
     case "INIT_ARTICLES":
       return action.articles
@@ -31,3 +31,5 @@ export default (state = initialState, action) => {
       return state;
   }
 }
+
+export default articleReducer

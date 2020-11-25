@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { CKEditor } from '@ckeditor/ckeditor5-react'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import ClassicEditor from '@lklein0189/ckeditor5-build-blog'
 import { createArticle } from '../../reducers/articleReducer'
 import { useDispatch } from 'react-redux'
+import { config } from '../../editorConfig'
 // needs validations
 
 const CreateArticlePage = routeProps => {
+  ClassicEditor.config = config
   const dispatch = useDispatch()
+
   const [body, setBody] = useState('')
 
   const [inputs, setInputs] = useState({
@@ -17,21 +20,32 @@ const CreateArticlePage = routeProps => {
     main_image_alt_text: "",
   });
 
+  const [image, setImage] = useState()
+
   const handleChange = e => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
+  const storeImage = img => {
+    setImage(img)
+  }
+
+  const handleImage = e => {
+    const file = e.target.files[0]
+    storeImage(file)
+  }
+
   const handleCKEditor = (e, editor) => {
-    
     const data = editor.getData()
     setBody(data)
   }
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let article = {...inputs, body}
+    let article = {...inputs, body, jumbotron_image: image}
+    console.log(article)
     dispatch(createArticle(article))
-    routeProps.history.push('/articles')
+    // routeProps.history.push('/articles')
   };
 
   return (
@@ -79,6 +93,14 @@ const CreateArticlePage = routeProps => {
           value={inputs.main_image_alt_text}
           onChange={handleChange}
           required
+        />
+        <input 
+          id="jumbotron image"
+          placeholder="jumbotron image"
+          name="jumbotron_image"
+          type="file"
+          value={inputs.jumbotron_image}
+          onChange={handleImage}
         />
         <CKEditor  
           editor={ClassicEditor}
