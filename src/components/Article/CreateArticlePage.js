@@ -26,13 +26,9 @@ const CreateArticlePage = routeProps => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
-  const storeImage = img => {
-    setImage(img)
-  }
-
   const handleImage = e => {
     const file = e.target.files[0]
-    storeImage(file)
+    setImage(file)
   }
 
   const handleCKEditor = (e, editor) => {
