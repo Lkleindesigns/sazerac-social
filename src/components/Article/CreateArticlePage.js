@@ -38,7 +38,10 @@ const CreateArticlePage = routeProps => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let article = {...inputs, body, jumbotron_image: image}
+    const formData = new FormData()
+    formData.append("jumbotron_image", image)
+    console.log(formData)
+    let article = {...inputs, body, jumbotron_image: formData}
     console.log(article)
     dispatch(createArticle(article))
     // routeProps.history.push('/articles')
