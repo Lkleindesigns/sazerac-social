@@ -14,11 +14,10 @@ const create =  async (article) => {
     data: { article },
     withCredentials: true,
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      "Accept": "application/json",
     }
   })
-  console.log(article)
+  console.log(response)
   return response.data
 }
 const articleService = { getAll, create }
