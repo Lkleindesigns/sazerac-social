@@ -11,7 +11,7 @@ const getAll = async () => {
 const create =  async (article) => {
   const response = await axios(`${baseUrl}/articles`, {
     method: "POST",
-    data: { article },
+    data: article,
     withCredentials: true,
     headers: {
       "Accept": "application/json",
