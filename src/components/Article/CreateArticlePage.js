@@ -4,7 +4,6 @@ import ClassicEditor from '@lklein0189/ckeditor5-build-blog'
 import { createArticle } from '../../reducers/articleReducer'
 import { useDispatch } from 'react-redux'
 import { config } from '../../editorConfig'
-import { serialize } from 'object-to-formdata'
 // needs validations
 
 const CreateArticlePage = routeProps => {
@@ -39,21 +38,18 @@ const CreateArticlePage = routeProps => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    // const formData = new FormData()
-    // formData.append("jumbotron_image", image)
-    // formData.append("title", inputs.title)
-    // formData.append("thumb_image", inputs.thumb_image)
-    // formData.append("main_image", inputs.thumb_image)
-    // formData.append("main_image_title", inputs.main_image_tile)
-    // formData.append("main_image_alt_text", inputs.main_image_alt_text)
-    // formData.append("body", body)
-    // let article = formData
-    // console.log(article.getAll("jumbotron_image"))
-    // const formData = new FormData()
-    // formData.append("jumbotron_image", image)
-    let article = {article: {...inputs, body, jumbotron_image: image} }
-    const formData = serialize(article)
-    console.log(formData)
+    const formData = new FormData()
+    formData.append("jumbotron_image", image)
+    formData.append("title", inputs.title)
+    formData.append("thumb_image", inputs.thumb_image)
+    formData.append("main_image", inputs.thumb_image)
+    formData.append("main_image_title", inputs.main_image_tile)
+    formData.append("main_image_alt_text", inputs.main_image_alt_text)
+    formData.append("body", body)
+
+    // let article = {article: {...inputs, body, jumbotron_image: image} }
+ 
+    console.log(formData.getAll("jumbotron_image"))
     dispatch(createArticle(formData))
     // routeProps.history.push('/articles')
   };
