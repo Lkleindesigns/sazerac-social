@@ -15,7 +15,6 @@ const create =  async (article) => {
     withCredentials: true,
     headers: {
       "Accept": "application/json",
-      "Content-Type": "multipart/form-data"
     }
   })
   console.log(response)

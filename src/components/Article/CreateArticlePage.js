@@ -40,7 +40,7 @@ const CreateArticlePage = routeProps => {
     e.preventDefault();
     const formData = new FormData()
     formData.append("jumbotron_image", image)
-    let article = {...inputs, jumbotron_image: formData}
+    let article = {...inputs, body, jumbotron_image: formData}
     dispatch(createArticle(article))
     // routeProps.history.push('/articles')
   };
