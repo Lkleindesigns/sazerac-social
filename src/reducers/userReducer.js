@@ -50,7 +50,7 @@ export const registerUser = (credentials) => {
   }
 }
 
-export default (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
   switch(action.type) {
     case "LOGIN": 
       return action.user
@@ -62,3 +62,5 @@ export default (state = initialState, action) => {
       return state
   }
 }
+
+export default userReducer

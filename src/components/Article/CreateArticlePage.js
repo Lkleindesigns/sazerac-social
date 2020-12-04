@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css';
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@lklein0189/ckeditor5-build-blog'
 import { createArticle } from '../../reducers/articleReducer'
 import { useDispatch } from 'react-redux'
+import { config } from '../../editorConfig'
 // needs validations
 
 const CreateArticlePage = routeProps => {
+  ClassicEditor.config = config
   const dispatch = useDispatch()
+
   const [body, setBody] = useState('')
 
   const [inputs, setInputs] = useState({
@@ -17,33 +20,39 @@ const CreateArticlePage = routeProps => {
     main_image_alt_text: "",
   });
 
+  const [image, setImage] = useState()
+
   const handleChange = e => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
-  const handleQuill = (value) => {
-    setBody(value)
+  const handleImage = e => {
+    const file = e.target.files[0]
+    setImage(file)
+  }
+
+  const handleCKEditor = (e, editor) => {
+    const data = editor.getData()
+    setBody(data)
   }
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let article = {...inputs, body}
-    dispatch(createArticle(article))
+    const formData = new FormData()
+    formData.append("jumbotron_image", image)
+    formData.append("title", inputs.title)
+    formData.append("thumb_image", inputs.thumb_image)
+    formData.append("main_image", inputs.thumb_image)
+    formData.append("main_image_title", inputs.main_image_tile)
+    formData.append("main_image_alt_text", inputs.main_image_alt_text)
+    formData.append("body", body)
+
+    // let article = {article: {...inputs, body, jumbotron_image: image} }
+ 
+    console.log(formData.getAll("jumbotron_image"))
+    dispatch(createArticle(formData))
+    // routeProps.history.push('/articles')
   };
-
-  const modules = {
-    toolbar: [
-      [{ 'font': [] }],
-      [{ 'header': [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{ 'align': [] }],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
-      [{ 'color': [] }, { 'background': [] }],
-      ['clean'],
-    ],
-  }
-
 
   return (
     <div>
@@ -91,14 +100,17 @@ const CreateArticlePage = routeProps => {
           onChange={handleChange}
           required
         />
-        <ReactQuill
-          id="quill"
-          name="quill"
-          value={body}
-          onChange={handleQuill}
-          modules={modules}
-          theme="snow"
-          required
+        <input 
+          id="jumbotron image"
+          placeholder="jumbotron image"
+          name="jumbotron_image"
+          type="file"
+          value={inputs.jumbotron_image}
+          onChange={handleImage}
+        />
+        <CKEditor  
+          editor={ClassicEditor}
+          onChange={handleCKEditor}
         />
         <button>Submit</button>
       </form>

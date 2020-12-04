@@ -73,5 +73,5 @@ async function isLoggedIn() {
 }
 
 
-
-export default { login, logout, isLoggedIn, getUser, register  }
+const userService = { login, logout, isLoggedIn, getUser, register }
+export default userService

@@ -1,10 +1,7 @@
 import React from "react";
+import ReactHtmlParser from 'react-html-parser'
 
 const Article = ({ article }) => {
-
-  function createMarkup() {
-    return { __html: article.body}
-  }
   return (
     <div className="ArticleCard">
       <img alt={article.title} src={article.main_image} />
@@ -12,7 +9,7 @@ const Article = ({ article }) => {
       <div className="ArticleCard-body">
         <p>{new Date(article.created_at).toDateString()}</p>
         <p>{article.slug}</p>
-        <div dangerouslySetInnerHTML={createMarkup()}></div>
+        <div>{ReactHtmlParser(article.body)}</div>
       </div>
     </div>
   );
