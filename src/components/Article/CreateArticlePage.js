@@ -39,17 +39,11 @@ const CreateArticlePage = routeProps => {
   const handleSubmit = async e => {
     e.preventDefault();
     const formData = new FormData()
+    Object.keys(inputs).forEach((key) => {
+      formData.append(key, inputs[key])
+    })
     formData.append("jumbotron_image", image)
-    formData.append("title", inputs.title)
-    formData.append("thumb_image", inputs.thumb_image)
-    formData.append("main_image", inputs.thumb_image)
-    formData.append("main_image_title", inputs.main_image_tile)
-    formData.append("main_image_alt_text", inputs.main_image_alt_text)
     formData.append("body", body)
-
-    // let article = {article: {...inputs, body, jumbotron_image: image} }
- 
-    console.log(formData.getAll("jumbotron_image"))
     dispatch(createArticle(formData))
     // routeProps.history.push('/articles')
   };
