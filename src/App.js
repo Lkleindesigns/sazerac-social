@@ -2,21 +2,15 @@ import React, { useEffect } from "react";
 import Router from "./routers/Router";
 import { checkUserSession } from './reducers/userReducer' 
 import { useDispatch } from 'react-redux'
-import "./styles/App.css";
 import Container from '@material-ui/core/Container';
-import { withTheme } from './components/styles/Theme'
+import { withTheme } from './styles/Theme'
 import { CssBaseline } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import styles from './styles/AppStyles'
 
 function App() {
   const dispatch = useDispatch()
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      height: "100vh"
-    },
-  }));
-  const classes = useStyles()
+  const classes = styles()
 
   useEffect(() => {
     dispatch(checkUserSession())

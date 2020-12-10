@@ -2,10 +2,12 @@ import React from "react";
 import { logoutUser } from "../reducers/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import styles from '../styles/NavbarStyles'
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const classes = styles()
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -19,7 +21,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div>
+      <div className={classes.root}>
         {isWriter && <Link to="/publisher/article/new">Add post </Link>}
         {user && <button onClick={handleLogout}>Logout </button>}
         <Link to="/">Home </Link>
