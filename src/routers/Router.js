@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import CreateArticlePage from "../components/Article/CreateArticlePage";
 import RegisterForm from '../components/RegisterForm'
 import ArticleList from "../components/Article/ArticleList";
@@ -45,7 +44,7 @@ const Router = () => {
 
   return(
     <>
-      <Navbar />
+      
       <Switch>
         <Route exact path="/" render={() => <Landing />} />
         <Route exact path="/register" render={() => <RegisterForm />} />

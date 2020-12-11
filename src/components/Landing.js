@@ -4,9 +4,8 @@ const Landing = () => {
   return (
     <div>
       <header>
-        <div>Sazerac Social</div>
-      </header>
       <h1>Landing page</h1>
+      </header>
       <button>Welcome!</button>
     </div>
   )

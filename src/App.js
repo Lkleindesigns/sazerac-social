@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import { withTheme } from './styles/Theme'
 import { CssBaseline } from '@material-ui/core'
 import styles from './styles/AppStyles'
+import Navbar from "./components/Navbar";
 
 function App() {
   const dispatch = useDispatch()
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       <CssBaseline />
+      <Navbar />
       <Container maxWidth="lg" className={classes.root}>
         <Router />
         <div>{process.env.NODE_ENV}</div>
