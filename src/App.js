@@ -23,9 +23,9 @@ function App() {
       <Navbar />
       <Container maxWidth="lg" className={classes.root}>
         <Router />
-        <div>{process.env.NODE_ENV}</div>
+        {/* <div>{process.env.NODE_ENV}</div>
         <div>{process.env.PORT}</div>
-        <div>{process.env.REACT_APP_PORT}</div>
+        <div>{process.env.REACT_APP_PORT}</div> */}
       </Container>
     </>
   );
