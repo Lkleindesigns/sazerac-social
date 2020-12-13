@@ -13,8 +13,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import { toggleTheme } from '../reducers/themeReducer'
 
-const Navbar = () => {
+const Navbar = (props) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const classes = styles();
@@ -40,9 +41,13 @@ const Navbar = () => {
         return role.name === "writer";
       })
     : null;
+  const toggle = () => {
+    dispatch(toggleTheme())
+  }
 
   return (
     <div className={classes.root}>
+      <button onClick={toggle}>Dark </button>
       <AppBar position="sticky" color="default">
         <Container>
           <Toolbar>
